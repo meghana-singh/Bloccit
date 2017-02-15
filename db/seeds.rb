@@ -7,7 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'random_data'
 
- Post.find_or_create_by(title: "Ruby On Rails", body: "Ruby on Rails is a Web-development framework")
+ unique_post = Post.find_or_create_by(title: "Ruby On Rails", body: "Ruby on Rails is a Web-development framework")
+ unique_post.comments.create(body: "Ruby is quite powerful and easy to use. Love it!! :)")
  
  # Create Posts
  50.times do
@@ -29,6 +30,7 @@ require 'random_data'
      body: RandomData.random_paragraph
    )
  end
+ 
  
  puts "Seed finished"
  puts "#{Post.count} posts created"
