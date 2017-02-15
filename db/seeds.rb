@@ -7,6 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'random_data'
 
+ Post.find_or_create_by(title: "Ruby On Rails", body: "Ruby on Rails is a Web-development framework")
+ 
  # Create Posts
  50.times do
  # #1
