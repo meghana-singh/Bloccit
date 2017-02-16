@@ -11,11 +11,14 @@ require 'random_data'
  unique_post.comments.create(body: "Ruby is quite powerful and easy to use. Love it!! :)")
  
  # Create Posts
+ i = 0
  50.times do
  # #1
+ i += 1
+ i%5==0 ? title_data = "SPAM" : title_data = RandomData.random_sentence
    Post.create!(
  # #2
-     title:  RandomData.random_sentence,
+     title:  title_data,
      body:   RandomData.random_paragraph
    )
  end
