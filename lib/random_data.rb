@@ -30,4 +30,8 @@
    def self.rand_data
      rand(100..500) 
    end
+   
+   def self.random_bool
+     [true, false].sample 
+   end
  end
