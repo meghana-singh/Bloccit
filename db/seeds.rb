@@ -10,6 +10,15 @@ require 'random_data'
  unique_post = Post.find_or_create_by(title: "Ruby On Rails", body: "Ruby on Rails is a Web-development framework")
  unique_post.comments.create(body: "Ruby is quite powerful and easy to use. Love it!! :)")
  
+  # Create Topics
+ 15.times do
+   Topic.create!(
+     name:         RandomData.random_sentence,
+     description:  RandomData.random_paragraph
+   )
+ end
+ topics = Topic.all
+ 
  # Create Posts
  i = 0
  50.times do
@@ -18,6 +27,7 @@ require 'random_data'
  i%5==0 ? title_data = "SPAM" : title_data = RandomData.random_sentence
    Post.create!(
  # #2
+     topic: topics.sample,
      title:  title_data,
      body:   RandomData.random_paragraph
    )
@@ -54,10 +64,9 @@ require 'random_data'
    )
  end
  
+ puts "#{Topic.count} topics created"
  puts "#{Question.count} Questions created"
- 
  puts "#{Advertisement.count} advertisements created"
- 
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
  puts "Seed finished"
