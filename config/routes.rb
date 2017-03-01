@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   
   resources :users, only: [:new, :create]
   
+  post 'users/confirm'
+  
   resources :topics do
     resources :posts, except: [:index]
     resources :sponsored_posts, except: [:index]
