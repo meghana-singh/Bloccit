@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
+   has_many :posts
    before_save { self.email = email.downcase if email.present? }
    #before_save { self.name = name.split.map {|n| n.capitalize}.join(" ") if name.present?}
-   
+   before_save {self.name = name.gsub(/(\b\w)/) {|first_l| first_l.upcase} if name.present?}
    
  # #3
    validates :name, length: { minimum: 1, maximum: 100 }, presence: true

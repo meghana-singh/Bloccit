@@ -7,8 +7,17 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'random_data'
 
- unique_post = Post.find_or_create_by(title: "Ruby On Rails", body: "Ruby on Rails is a Web-development framework")
- unique_post.comments.create(body: "Ruby is quite powerful and easy to use. Love it!! :)")
+ 
+ # Create Users
+ 5.times do
+   User.create!(
+ # #3
+   name:     RandomData.random_name,
+   email:    RandomData.random_email,
+   password: RandomData.random_sentence
+   )
+ end
+ users = User.all
  
   # Create Topics
  15.times do
@@ -22,12 +31,13 @@ require 'random_data'
  # Create Posts
  i = 0
  50.times do
- # #1
+ 
  i += 1
- i%5==0 ? title_data = "SPAM" : title_data = RandomData.random_sentence
+ i%5==0 ? title_data = "SPAMS" : title_data = RandomData.random_sentence
    Post.create!(
- # #2
-     topic: topics.sample,
+ 
+     user:   users.sample,
+     topic:  topics.sample,
      title:  title_data,
      body:   RandomData.random_paragraph
    )
@@ -74,6 +84,16 @@ require 'random_data'
    )
  end
  
+ user = User.first
+ user.update_attributes!(
+   email: 'meghana1602@gmail.com', 
+   password: 'helloworld'
+ )
+ 
+ #unique_post = Post.find_or_create_by(title: "Ruby On Rails", body: "Ruby on Rails is a Web-development framework")
+ #unique_post.comments.create(body: "Ruby is quite powerful and easy to use. Love it!! :)")
+ 
+ puts "#{User.count} users created"
  puts "#{Topic.count} topics created"
  puts "#{Question.count} Questions created"
  puts "#{Advertisement.count} advertisements created"
