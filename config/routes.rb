@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   
   resources :questions
-  resources :advertisements
+  resources :advertisements, only: [:index, :new, :create, :show]
   
   get 'about' => 'welcome#about'
   get 'welcome/faq'
