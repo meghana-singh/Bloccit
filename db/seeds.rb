@@ -37,7 +37,7 @@ require 'random_data'
  50.times do
  
  SponsoredPost.create!(
- # #2
+     topic: topics.sample,
      title:  RandomData.random_sentence,
      body:   RandomData.random_paragraph,
      price:  RandomData.rand_data
