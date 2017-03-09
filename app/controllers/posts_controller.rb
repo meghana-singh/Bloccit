@@ -74,7 +74,7 @@ class PostsController < ApplicationController
        post = Post.find(params[:id])
        unless current_user == post.user || current_user.moderator? || current_user.admin?
          flash[:alert] = "You must be a moderator or admin or the owner of the post to do that."
-         redirect_to topics_path
+         redirect_to [post.topic, post]
        end
   end
    
