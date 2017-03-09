@@ -1,11 +1,18 @@
+<h1>Sign Up Confirmation</h1>
 <div class="row">
-   <div class="col-md-8">
-     <p> Name: <%= @user.name %></p>
-     <p> Email: <%= @user.email %></p>
-     <p> Password: <%= @user.password %></p>
-   </div>
    <div class="col-md-4">
-      <%= button_to "Confirm", {controller: "users", action: "create", params: params}, class: 'btn btn-success' %>
-      <%= link_to "Cancel", new_user_path, class: 'btn btn-danger' %>
+     <h3>Are you sure these values are correct?</h3>
+     <h4> Name: <%= @user.name %></h4>
+     <h4> Email: <%= @user.email %></h4>
+   </div>
+</div>
+
+<div class="row">
+   <div class="col-md-4", style="width: auto;">
+      <%= button_to "Yes", {controller: "users", action: "create", params: params}, class: 'btn btn-success' %>
+   </div>   
+
+   <div class="col-md-4", style="width: auto;">
+      <%= button_to "No", {controller: "users", action: "new"}, class: 'btn btn-failure', :method => :get %>
    </div>
 </div>
