@@ -8,6 +8,7 @@ RSpec.describe User, type: :model do
    it { is_expected.to validate_length_of(:name).is_at_least(1) }
    
    it { is_expected.to have_many(:posts) }
+   it { is_expected.to have_many(:comments) }
  
    # Shoulda tests for email
    it { is_expected.to validate_presence_of(:email) }
@@ -34,19 +35,17 @@ RSpec.describe User, type: :model do
        expect(user).to respond_to(:admin?)
      end
  
- # #3
      it "responds to member?" do
        expect(user).to respond_to(:member?)
      end
    end
 
    describe "roles" do
- # #4
+ 
      it "is member by default" do
        expect(user.role).to eql("member")
      end
  
- # #5
      context "member user" do
        it "returns true for #member?" do
          expect(user.member?).to be_truthy
@@ -72,7 +71,7 @@ RSpec.describe User, type: :model do
        end
      end
    end
-   end
+   
    
    describe "invalid user" do
      let(:user_with_invalid_name) { User.new(name: "", email: "user@bloccit.com") }
