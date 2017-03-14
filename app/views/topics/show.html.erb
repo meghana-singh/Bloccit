@@ -1,7 +1,6 @@
  <h1><%= @topic.name %></h1>
- 
- 
- <% if user_is_mod_auth_for_topics? %>
+
+ <% if is_user_mod_or_admin_of_topics? %>
     <%= link_to "Edit Topic", edit_topic_path, class: 'btn btn-success' %>
  <% end %>
  <% if user_is_authorized_for_topics? %>
@@ -13,6 +12,7 @@
      <p class="lead"><%= @topic.description %></p>
  <!-- #10 -->
      <% @topic.posts.each do |post| %>
+       <%= render partial: 'votes/voter', locals: { post: post } %>
        <%= render post %>
      <% end %>
      <% @topic.sponsored_posts.each do |post| %>

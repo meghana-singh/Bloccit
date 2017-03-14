@@ -3,7 +3,7 @@ module TopicsHelper
         current_user && current_user.admin?
     end
     
-   def user_is_mod_auth_for_topics?
+   def is_user_mod_or_admin_of_topics?
         (current_user && current_user.admin?) || (current_user && current_user.moderator?)
    end
 end

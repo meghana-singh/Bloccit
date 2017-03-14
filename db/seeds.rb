@@ -31,18 +31,22 @@ require 'random_data'
  # Create Posts
  i = 0
  50.times do
- 
- i += 1
- i%5==0 ? title_data = "SPAMS" : title_data = RandomData.random_sentence
-   Post.create!(
- 
+   i += 1
+   i%5==0 ? title_data = "SPAMS" : title_data = RandomData.random_sentence
+   
+   post = Post.create!(
      user:   users.sample,
      topic:  topics.sample,
      title:  title_data,
      body:   RandomData.random_paragraph
    )
+ 
+   post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+   rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
  end
+
  posts = Post.all
+ 
  
  50.times do
  
@@ -99,6 +103,14 @@ require 'random_data'
    password: 'helloworld'
  )
  
+ # Create a modarator
+ member = User.create!(
+   name:     'Moderator',
+   email:    'mod@example.com',
+   password: 'helloworld',
+   role:     'moderator'
+ )
+ 
  #unique_post = Post.find_or_create_by(title: "Ruby On Rails", body: "Ruby on Rails is a Web-development framework")
  #unique_post.comments.create(body: "Ruby is quite powerful and easy to use. Love it!! :)")
  
@@ -109,4 +121,5 @@ require 'random_data'
  puts "#{Post.count} posts created"
  puts "#{SponsoredPost.count} SponsoredPosts created"
  puts "#{Comment.count} comments created"
+ puts "#{Vote.count} votes created"
  puts "Seed finished"
