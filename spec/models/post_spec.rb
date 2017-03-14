@@ -84,4 +84,13 @@ RSpec.describe Post, type: :model do
          expect(post.rank).to eq (old_rank - 1)
        end
    end
+   
+   describe "Updates value of vote of new post" do
+     
+      it "vote value is 1 when the new post is created" do
+         new_post =  topic.posts.create(title: title, body: body, user: user) 
+         expect(new_post.votes.first.value).to eq 1
+      end
+      
+   end
 end
