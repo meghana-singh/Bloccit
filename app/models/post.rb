@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
     
     scope :ordered_by_title, -> {order('title DESC')}
     scope :ordered_by_reverse_created_at, -> {order('created_at ASC')}
+    scope :visible_to, -> (user) { user ? all : joins(:topic).where('topics.public' => true) }
     
     validates :title, length: { minimum: 5 }, presence: true
     validates :body, length: { minimum: 20 }, presence: true
@@ -36,6 +37,11 @@ class Post < ActiveRecord::Base
       new_rank = points + age_in_days
       update_attribute(:rank, new_rank)
     end
+
+    def create_favorite
+       user.favorites.create
+       FavoriteMailer.new_post(self).deliver_now
+    end
     
     private
     
@@ -43,8 +49,5 @@ class Post < ActiveRecord::Base
        user.votes.create(value: 1, post: self) 
     end
     
-    def create_favorite
-       user.favorites.create
-       FavoriteMailer.new_post(self).deliver_now
-    end
+
 end

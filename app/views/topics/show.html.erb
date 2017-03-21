@@ -12,7 +12,7 @@
      <p class="lead"><%= @topic.description %></p>
  <!-- #10 -->
      <% @topic.posts.each do |post| %>
-       <%= render partial: 'votes/voter', locals: { post: post } %>
+       
        <%= render post %>
      <% end %>
      <% @topic.sponsored_posts.each do |post| %>
